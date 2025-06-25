@@ -49,7 +49,7 @@ These focus on communication between objects.
 ## 🗂️ Repository Structure
 
 ```bash
-design-patterns/
+Patterns_MVincent/
 │
 ├── creational/
 │   ├── singleton/
