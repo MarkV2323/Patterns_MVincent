@@ -52,16 +52,16 @@ These focus on communication between objects.
 Patterns_MVincent/
 │
 ├── creational/
-│   ├── singleton/
-│   └── factory-method/
+│   ├── singleton.py
+│   └── factory-method.py
 │
 ├── structural/
-│   ├── adapter/
-│   └── decorator/
+│   ├── adapter.py
+│   └── decorator.py
 │
 ├── behavioral/
-│   ├── observer/
-│   └── strategy/
+│   ├── observer.py
+│   └── strategy.py
 │
 ├── shared/                # Utility classes / Resources
 └── README.md              # You're here!
@@ -72,6 +72,15 @@ Each pattern folder contains:
 * A simple code example
 * Code comments explaining each part
 * A short `README.md` explaining the pattern, when to use it, pros/cons, and real-world examples
+
+## 📚 PEP 8 Naming Summary
+| Type           | Style                                       | Example                        |
+| -------------- | ------------------------------------------- | ------------------------------ |
+| Directory name | `lowercase` or `lowercase_with_underscores` | `my_app/`, `data_processing/`  |
+| Module name    | `snake_case` (all lowercase)                | `config.py`, `api_client.py`   |
+| Class name     | `PascalCase`                                | `DataParser`, `MyService`      |
+| Function name  | `snake_case`                                | `parse_file()`, `connect_db()` |
+| Constant name  | `UPPER_CASE`                                | `MAX_RETRIES = 3`              |
 
 ## 🛠️ Getting Started
 
