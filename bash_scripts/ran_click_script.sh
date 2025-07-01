@@ -22,7 +22,9 @@ MAX_DRIFT=6           # max distance before reset
 MIN_RUNTIME=$((15 * 60))  # 15 minutes
 MAX_RUNTIME=$((30 * 60))  # 30 minutes
 
-read -r START_X START_Y <<< "$(xdotool getmouselocation --shell | awk -F= '/X=|Y=/ {print $2}')"
+START_X=$(xdotool getmouselocation --shell | grep '^X=' | cut -d= -f2)
+START_Y=$(xdotool getmouselocation --shell | grep '^Y=' | cut -d= -f2)
+printf "START_X=$START_X and START_Y=$START_Y\n"
 
 random_offset() {
     awk -v min=$1 -v max=$2 'BEGIN { srand(); print int(min + rand() * (max - min + 1)) }'
