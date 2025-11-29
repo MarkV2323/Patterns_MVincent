@@ -4,7 +4,7 @@
 
 // Abstract Interface that provides a shared way of "building" objects
 // that must be implemented by "concrete builders"
-// 
+//
 // 1) We want to avoid the shared objects having large constructors
 // 2) We want to create different representations of some product
 class IBuilder {
@@ -22,6 +22,4 @@ public:
 
   // Perform build step three involving color
   virtual void BuildStepThree(Color color) noexcept = 0;
-
 };
-

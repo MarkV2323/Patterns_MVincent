@@ -1,35 +1,33 @@
-#include <iostream>
-#include <thread>
-#include <future>
 #include <chrono>
-#include <mutex>
 #include <condition_variable>
 #include <future>
+#include <iostream>
+#include <mutex>
+#include <thread>
 
 #include <fmt/base.h>
 #include <fmt/color.h>
 
 /**
-* <thread>              -> for threads 
-* <jthread>             -> for threads that atuomatically rejoin on destruction
-*                          and stoped / cancelled in certain situations
-* <mutex>               -> for locking and synchronization
-* <condition_variable>  -> for thread communication
-* <future>              -> for async results
-* <atomic>              -> for low-level atomic operations
-**/
+ * <thread>              -> for threads
+ * <jthread>             -> for threads that atuomatically rejoin on destruction
+ *                          and stoped / cancelled in certain situations
+ * <mutex>               -> for locking and synchronization
+ * <condition_variable>  -> for thread communication
+ * <future>              -> for async results
+ * <atomic>              -> for low-level atomic operations
+ **/
 
 std::mutex mtx;
 std::condition_variable cv;
 bool ready = false;
 
-std::string GetRedStr(const char* s) {
+std::string GetRedStr(const char *s) {
   return fmt::format(fmt::fg(fmt::color::misty_rose), "{}", s);
 }
-std::string GetGreenStr(const char* s) {
+std::string GetGreenStr(const char *s) {
   return fmt::format(fmt::fg(fmt::color::sea_green), "{}", s);
 }
-
 
 // Why Atomics? Write safe, lock-free multithreaded code, share vars
 // between threads without a mutex and avoid data races!
@@ -52,7 +50,7 @@ void worker() {
   fmt::print("{}", GetRedStr("I am working at the moment!\n"));
 }
 
-void safe_print(const std::string& msg) {
+void safe_print(const std::string &msg) {
   // lock_guard is simple RAII; auto releases the mutex on exit...
   // unique_lock gives more flexibility
   std::lock_guard<std::mutex> lock(mtx);
@@ -75,11 +73,9 @@ void example(std::string id) {
   }
 }
 
-int compute() {
-  return 42;
-}
+int compute() { return 42; }
 
-int main(int argc, char const* argv[]) {
+int main(int argc, char const *argv[]) {
   fmt::print("Starting threads program....\n");
 
   // Launch a few threads
