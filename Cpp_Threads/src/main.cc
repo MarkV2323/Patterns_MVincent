@@ -6,6 +6,9 @@
 #include <condition_variable>
 #include <future>
 
+#include <fmt/base.h>
+#include <fmt/color.h>
+
 /**
 * <thread>              -> for threads 
 * <jthread>             -> for threads that atuomatically rejoin on destruction
@@ -19,6 +22,14 @@
 std::mutex mtx;
 std::condition_variable cv;
 bool ready = false;
+
+std::string GetRedStr(const char* s) {
+  return fmt::format(fmt::fg(fmt::color::misty_rose), "{}", s);
+}
+std::string GetGreenStr(const char* s) {
+  return fmt::format(fmt::fg(fmt::color::sea_green), "{}", s);
+}
+
 
 // Why Atomics? Write safe, lock-free multithreaded code, share vars
 // between threads without a mutex and avoid data races!
@@ -38,14 +49,14 @@ void worker() {
   std::unique_lock<std::mutex> lock(mtx);
   cv.wait(lock, [] { return ready; });
   // Time to actually do things....
-  std::cout << "I am working so hard right now!@#!" << '\n';
+  fmt::print("{}", GetRedStr("I am working at the moment!\n"));
 }
 
 void safe_print(const std::string& msg) {
   // lock_guard is simple RAII; auto releases the mutex on exit...
   // unique_lock gives more flexibility
   std::lock_guard<std::mutex> lock(mtx);
-  std::cout << msg << '\n';
+  fmt::print("{}\n", GetGreenStr(msg.c_str()));
 }
 
 void example(std::string id) {
@@ -53,7 +64,7 @@ void example(std::string id) {
   int amt = 0;
   while (true) {
     if (i % 5'000'000'000 == 0) {
-      std::cout << "T" << id << " -> hit 5_000_000_000!" << "\n";
+      fmt::print("T{} -> hit 5_000_000_000\n", id);
       i = 0;
       amt++;
     }
@@ -69,7 +80,7 @@ int compute() {
 }
 
 int main(int argc, char const* argv[]) {
-  std::cout << "Hello world!" << std::endl;
+  fmt::print("Starting threads program....\n");
 
   // Launch a few threads
   std::thread t1(example, "a");
@@ -99,12 +110,12 @@ int main(int argc, char const* argv[]) {
   std::cout << result.get() << '\n';
 
   std::thread t6(increment);
-  std::cout << "Counter: " << counter << '\n';
+  fmt::print("Counter: {}\n", std::to_string(counter));
   std::thread t7(increment);
-  std::cout << "Counter: " << counter << '\n';
+  fmt::print("Counter: {}\n", std::to_string(counter));
   t6.join();
   t7.join();
-  std::cout << "Counter: " << counter << '\n';
+  fmt::print("Counter: {}\n", std::to_string(counter));
 
   return 0;
 }
