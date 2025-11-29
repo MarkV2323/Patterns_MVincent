@@ -15,7 +15,7 @@ These patterns deal with object creation mechanisms.
 * [] Singleton
 * [] Factory Method
 * [] Abstract Factory
-* [] Builder
+* [X] Builder
 * [] Prototype
 
 ### 2. **Structural Patterns**
