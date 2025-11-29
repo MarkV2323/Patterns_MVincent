@@ -7,11 +7,14 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 # -> FMT (used for general stdout)
 find_package(fmt CONFIG REQUIRED)
 
+# Glob Common Headers
+file(GLOB_RECURSE COMMONS "../../common/*.hpp")
+
 # Glob Source and Headers
 file(GLOB_RECURSE SOURCES "src/*.cpp" "src/*.cc")
 file(GLOB_RECURSE HEADERS "src/*.hpp")
 
 # Setup target & link
-add_executable(program ${SOURCES} ${HEADERS})
-target_include_directories(program PRIVATE ${CMAKE_SOURCE_DIR}/src)
+add_executable(program ${SOURCES} ${HEADERS} ${COMMONS})
+target_include_directories(program PRIVATE ${CMAKE_SOURCE_DIR}/src ../../common)
 target_link_libraries(program PRIVATE fmt::fmt)
