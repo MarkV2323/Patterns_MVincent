@@ -12,7 +12,7 @@ Design patterns are generally categorized into three main types:
 
 These patterns deal with object creation mechanisms.
 
-* [] Singleton
+* [X] Singleton
 * [] Factory Method
 * [] Abstract Factory
 * [X] Builder
